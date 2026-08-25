@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" role="img" aria-labelledby="title">
+<title>NeoCity Energy Grid</title>
+<defs>
+    <radialGradient id="node"><stop stop-color="#dfffff"/><stop offset=".2" stop-color="#54f1ff"/><stop offset="1" stop-color="#1063ff" stop-opacity="0"/></radialGradient>
+    <pattern id="grid" width="90" height="90" patternUnits="userSpaceOnUse"><path d="M90 0H0V90" fill="none" stroke="#2a83b6" stroke-opacity=".15"/></pattern>
+    </defs>
+
+    <rect width="1200" height="760" fill="#040b16"/>
+    <rect width="1200" height="760" fill="url(#grid)"/>
+    <g fill="none" stroke="#34eaff" stroke-opacity=".45" stroke-width="3">
+      <path d="M80 560 L240 410 L430 500 L620 320 L820 450 L1080 250"/>
+      <path d="M150 650 L310 510 L510 600 L700 430 L900 540 L1120 390"/>
+    </g>
+    <g fill="url(#node)">
+      <circle cx="80" cy="560" r="38"/><circle cx="240" cy="410" r="38"/><circle cx="430" cy="500" r="38"/><circle cx="620" cy="320" r="38"/><circle cx="820" cy="450" r="38"/><circle cx="1080" cy="250" r="38"/>
+    </g>
+    <g fill="#8af7ff">
+      <circle cx="80" cy="560" r="6"/><circle cx="240" cy="410" r="6"/><circle cx="430" cy="500" r="6"/><circle cx="620" cy="320" r="6"/><circle cx="820" cy="450" r="6"/><circle cx="1080" cy="250" r="6"/>
+    </g>
+    
+</svg>
