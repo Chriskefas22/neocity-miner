@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" role="img" aria-labelledby="title">
+<title>NeoCity Mining Core Panel</title>
+<defs>
+    <linearGradient id="p" x1="0" x2="1"><stop stop-color="#0b213c"/><stop offset="1" stop-color="#091127"/></linearGradient>
+    <radialGradient id="ring"><stop stop-color="#53edff" stop-opacity=".35"/><stop offset=".7" stop-color="#5068ff" stop-opacity=".1"/><stop offset="1" stop-color="#030914" stop-opacity="0"/></radialGradient>
+    </defs>
+
+    <rect x="36" y="48" width="1128" height="664" rx="28" fill="url(#p)" stroke="#2e7ba8" stroke-opacity=".35"/>
+    <circle cx="330" cy="374" r="170" fill="url(#ring)"/>
+    <circle cx="330" cy="374" r="120" fill="none" stroke="#49ebff" stroke-width="10" stroke-dasharray="220 180"/>
+    <circle cx="330" cy="374" r="88" fill="#07152b" stroke="#8f6cff" stroke-opacity=".75" stroke-width="3"/>
+    <path d="M330 285V463M241 374H419" stroke="#56f0ff" stroke-width="3" stroke-opacity=".65"/>
+    <g transform="translate(570 166)">
+      <rect width="500" height="130" rx="18" fill="#08172b" stroke="#254a6e"/>
+      <text x="22" y="40" fill="#79a3c0" font-family="Inter,Arial" font-size="18" font-weight="700" letter-spacing="2">CORE POWER</text>
+      <rect x="22" y="62" width="350" height="12" rx="6" fill="#10233b"/>
+      <rect x="22" y="62" width="290" height="12" rx="6" fill="#46e9ff"/>
+      <text x="402" y="77" fill="#e9fbff" font-family="Inter,Arial" font-size="26" font-weight="800">82%</text>
+    </g>
+    <g transform="translate(570 322)">
+      <rect width="500" height="130" rx="18" fill="#08172b" stroke="#254a6e"/>
+      <text x="22" y="40" fill="#79a3c0" font-family="Inter,Arial" font-size="18" font-weight="700" letter-spacing="2">ACTIVE HASHRATE</text>
+      <path d="M22 94 L80 80 L130 98 L180 60 L230 72 L280 50 L330 70 L380 42 L430 66 L470 36" fill="none" stroke="#8e70ff" stroke-width="4"/>
+    </g>
+    <g transform="translate(570 478)">
+      <rect width="500" height="130" rx="18" fill="#08172b" stroke="#254a6e"/>
+      <text x="22" y="40" fill="#79a3c0" font-family="Inter,Arial" font-size="18" font-weight="700" letter-spacing="2">GRID ENERGY</text>
+      <path d="M22 96 L76 78 L120 90 L160 64 L210 76 L250 52 L300 64 L344 43 L390 63 L440 48 L474 34" fill="none" stroke="#4be6a7" stroke-width="4"/>
+    </g>
+    
+</svg>
