@@ -1,0 +1,3 @@
+import { json } from "./supabase.mjs";
+export async function verifyTurnstile(token,ip){const secret=process.env.TURNSTILE_SECRET_KEY;if(!secret||!token)return {ok:false,code:!secret?"TURNSTILE_NOT_CONFIGURED":"TURNSTILE_REQUIRED"};const body=new URLSearchParams({secret,response:token});if(ip)body.set("remoteip",ip);const r=await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify",{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded"},body});const d=await r.json().catch(()=>({}));return {ok:d.success===true,code:d.success?null:"TURNSTILE_FAILED"}}
+export function requireTurnstile(result,res){if(result.ok)return true;json(res,503,{error:result.code,message:"Security verification is unavailable or failed."});return false}
