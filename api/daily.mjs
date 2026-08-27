@@ -1,0 +1,2 @@
+import {json} from "./_lib/supabase.mjs";import {requireUser} from "./_lib/auth.mjs";
+export default async function handler(req,res){if(req.method!=="POST")return json(res,405,{error:"METHOD_NOT_ALLOWED"});const user=await requireUser(req,res);if(!user)return;return json(res,409,{error:"DAILY_BONUS_NOT_CONFIGURED",message:"Daily Bonus needs an authoritative reward rule before production credit is enabled."})}
