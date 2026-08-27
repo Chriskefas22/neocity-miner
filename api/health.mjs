@@ -1,0 +1,2 @@
+import {adminClient,json} from "./_lib/supabase.mjs";
+export default async function handler(req,res){try{const db=adminClient();const {error}=await db.from("mining_pool").select("id").limit(1);if(error)return json(res,503,{ok:false,error:"SUPABASE_UNAVAILABLE"});return json(res,200,{ok:true,service:"neocity-miner",version:"4.5.0-final"})}catch(e){return json(res,503,{ok:false,error:"SERVER_NOT_CONFIGURED"})}}
