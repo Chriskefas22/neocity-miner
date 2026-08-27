@@ -1,0 +1,662 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#040913">
+  <meta name="description" content="NeoCity Miner — Living Mining City command system.">
+  <title>NeoCity Miner — V4.4 Final</title>
+  <link rel="preload" as="image" href="./assets/neocity/01-hero-city-core.svg">
+  <link rel="icon" type="image/svg+xml" href="./assets/neocity/brand/neocity-logo.svg">
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./css/neocity/hero.css">
+  <link rel="stylesheet" href="./css/neocity/economy.css">
+  <link rel="stylesheet" href="./css/neocity/modules.css">
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="app-shell">
+
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="icon-button neon-button" data-view="home" aria-label="NeoCity home">
+          <img class="brand-logo" src="./assets/neocity/brand/neocity-logo.svg" alt="NeoCity Miner">
+        </button>
+        <div class="brand">
+          <strong>NEOCITY</strong>
+          <small>MINER NETWORK</small>
+        </div>
+      </div>
+
+      <div class="topbar-center">
+        <div class="network-pill">
+          <span class="status-light"></span>
+          <div>
+            <small>NETWORK STATUS</small>
+            <strong>ONLINE</strong>
+          </div>
+          <div class="audio-bars" aria-hidden="true">
+            <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+          </div>
+        </div>
+        <div class="clock-pill">
+          <small>SERVER TIME</small>
+          <strong id="serverClock">--:--:--</strong>
+          <span>UTC +7</span>
+        </div>
+      </div>
+
+      <div class="topbar-right">
+        <button class="icon-button bell" id="notifyButton" aria-label="Notifications">◔<span></span></button>
+        <button class="profile-mini" type="button" id="profileButton" data-action="auth">
+          <span class="avatar">N</span>
+          <span class="profile-text">
+            <b id="profileName">NeoMiner</b>
+            <small id="profileId">ID: LOCAL</small>
+          </span>
+          <span class="chevron">⌄</span>
+        </button>
+        <button class="icon-button mobile-menu" id="menuButton" aria-label="Menu">☰</button>
+      </div>
+    </header>
+
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <aside class="side-nav" id="sideNav">
+      <div class="side-brand">
+        <div class="brand-ring"><img src="./assets/neocity/brand/neocity-logo.svg" alt="" aria-hidden="true"></div>
+        <div><b>NEOCITY</b><small>MINER NETWORK</small></div>
+      </div>
+
+      <nav class="main-nav" aria-label="Primary navigation">
+        <button class="nav-link active" data-view="home"><span>⌂</span><b>Dashboard</b></button>
+        <button class="nav-link" data-view="core"><span>◎</span><b>Core Control</b></button>
+        <button class="nav-link" data-view="yield"><span>↗</span><b>Yield Estimator</b></button>
+        <button class="nav-link" data-view="reserve"><span>◈</span><b>Reserve</b></button>
+        <button class="nav-link" data-view="network"><span>◌</span><b>Network</b></button>
+        <button class="nav-link" data-view="power"><span>ϟ</span><b>Power</b></button>
+        <button class="nav-link" data-view="economy"><span>◫</span><b>Economy</b></button>
+        <button class="nav-link" data-view="spin"><span>✦</span><b>Free Spin</b></button>
+        <button class="nav-link" data-view="levels"><span>⌬</span><b>Levels 0–70</b></button>
+        <button class="nav-link" data-view="shop"><span>▣</span><b>Shop</b></button>
+        <button class="nav-link" data-view="missions"><span>✦</span><b>Missions</b></button>
+        <button class="nav-link" data-view="referrals"><span>⌁</span><b>Referrals</b></button>
+        <button class="nav-link" data-view="wallet"><span>▤</span><b>Wallet</b></button>
+        <button class="nav-link" data-view="leaderboard"><span>★</span><b>Leaderboard</b></button>
+        <button class="nav-link" data-view="miners"><span>◉</span><b>Miners</b></button>
+<button class="nav-link" data-view="support"><span>AI</span><b>AI Support</b></button>
+<button class="nav-link" data-view="legal"><span>§</span><b>Terms</b></button>
+<button class="nav-link" data-view="privacy"><span>⌘</span><b>Privacy</b></button>
+        <button class="nav-link" data-view="settings"><span>⚙</span><b>Settings</b></button>
+        <button class="nav-link" data-view="help"><span>?</span><b>Help Center</b></button>
+      </nav>
+
+      <div class="side-panels">
+        <article class="side-mini">
+          <small class="eyebrow">CITY AMBIENCE</small>
+          <div class="sound-row">
+            <span id="audioLabel">AUDIO ON</span>
+            <button class="toggle on" id="audioToggle" type="button" aria-pressed="true"></button>
+          </div>
+          <div class="audio-bars wide" aria-hidden="true">
+            <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+          </div>
+        </article>
+
+        <article class="side-mini welcome-side">
+          <small class="eyebrow">WELCOME BONUS</small>
+          <div class="welcome-bonus">80 H/s</div>
+          <small class="soft">ONE-TIME CLAIM</small>
+          <button class="primary-btn welcome-claim" data-action="welcome" type="button">CLAIM 80 H/s</button><div class="claim-check" id="welcomeStatus">ONE-TIME SERVER CLAIM</div>
+        </article>
+      </div>
+    </aside>
+
+    <main class="main">
+      <!-- DASHBOARD -->
+      <section class="view active" id="view-home">
+        <div class="mobile-system-label">MOBILE FIRST EXPERIENCE</div>
+        <div class="home-grid">
+          <article class="hero-card glass nc-hero" aria-label="NeoCity Hero City Core">
+            <img class="nc-hero__layer nc-hero__background" src="./assets/neocity/hero/city-background.webp" alt="">
+            <img class="nc-hero__layer nc-hero__lights" src="./assets/neocity/hero/city-lights.webp" alt="">
+            <img class="nc-hero__layer nc-hero__platform" src="./assets/neocity/hero/platform.webp" alt="">
+            <img class="nc-hero__layer nc-hero__core-glow" src="./assets/neocity/hero/core-glow.webp" alt="">
+            <img class="nc-hero__layer nc-hero__core" src="./assets/neocity/hero/core.webp" alt="">
+            <img class="nc-hero__layer nc-hero__vehicles-glow" src="./assets/neocity/hero/vehicles-glow.webp" alt="">
+            <img class="nc-hero__layer nc-hero__vehicles" src="./assets/neocity/hero/vehicles.webp" alt="">
+            <img class="nc-hero__layer nc-hero__reflections" src="./assets/neocity/hero/reflections.webp" alt="">
+            <img class="nc-hero__layer nc-hero__particles" src="./assets/neocity/hero/particles.webp" alt="">
+
+            <div class="nc-hero__content">
+              <div class="nc-hero__content-inner">
+                <small class="nc-hero__eyebrow">LIVING CITY / CORE 01</small>
+                <h1 class="nc-hero__title">Control the core.<br>Power the city.</h1>
+                <p class="nc-hero__copy">
+                  NeoCity is a visual mining network where compute power,
+                  city energy and projected yield live inside one responsive
+                  command system.
+                </p>
+                <div class="hero-cta-row">
+                  <button class="primary-btn" data-view="economy">OPEN ECONOMY</button>
+                  <button class="secondary-btn" data-view="spin">FREE HASHRATE SPIN</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="hero-core-badge glass-soft">
+              <span class="status-light"></span>
+              <div>
+                <small>CITY MINING CORE</small>
+                <strong>ONLINE</strong>
+                <span>SECTOR 07 / N COIN</span>
+              </div>
+            </div>
+
+            <div class="hero-phase glass-soft">
+              <small>CITY PHASE</small>
+              <strong id="heroPhase">--</strong>
+              <span id="heroPhaseRange">--</span>
+              <p id="heroPhaseCopy">NeoCity phase status.</p>
+              <button class="tiny-link" data-view="network" type="button">VIEW PHASES ›</button>
+            </div>
+          </article>
+
+          <section class="hero-side" aria-label="Network metrics">
+            <article class="metric-card glass accent-cyan">
+              <div class="metric-top"><small>CORE POWER</small><span class="metric-status">LIVE</span></div>
+              <strong id="metricCore">--<small>%</small></strong>
+              <span>Mining Core Output</span>
+              <div class="chart-spark cyan-spark"></div>
+            </article>
+
+            <article class="metric-card glass accent-purple">
+              <div class="metric-top"><small>COMPUTE POWER</small></div>
+              <strong id="metricHash">--<small> H/s</small></strong>
+              <span>Effective Hashrate</span>
+              <div class="chart-spark purple-spark"></div>
+            </article>
+
+            <article class="metric-card glass accent-green">
+              <div class="metric-top"><small>GRID ENERGY</small></div>
+              <strong id="metricGrid">--<small>%</small></strong>
+              <span>City Energy Network</span>
+              <div class="chart-spark green-spark"></div>
+            </article>
+
+            <article class="metric-card glass accent-gold">
+              <div class="metric-top"><small>TOTAL BALANCE</small></div>
+              <strong id="metricCoin">--<small> N COIN</small></strong>
+              <span id="metricUsd">Wallet data is server-sourced.</span>
+              <div class="chart-spark gold-spark"></div>
+            </article>
+          </section>
+        </div>
+
+        <div class="system-header">
+          <div><small class="eyebrow">NEOCITY MINING SYSTEM</small><h2>Command modules</h2></div>
+        </div>
+
+        <div class="module-grid">
+          <button class="module-card glass" data-view="economy"><span class="module-number">01</span><img src="./assets/neocity/01-hero-city-core.svg" alt=""><div><b>ECONOMY CONTROL</b><small>N Coin, H/s, level and reward rules.</small><em>OPEN</em></div></button>
+          <button class="module-card glass" data-view="core"><span class="module-number">02</span><img src="./assets/neocity/03-holographic-core.svg" alt=""><div><b>CORE CONTROL</b><small>Manage mining core telemetry.</small><em>OPEN</em></div></button>
+          <button class="module-card glass" data-view="yield"><span class="module-number">03</span><img src="./assets/neocity/07-yield-visualization.svg" alt=""><div><b>YIELD ESTIMATOR</b><small>Projection only; final credit is server-side.</small><em>OPEN</em></div></button>
+          <button class="module-card glass" data-view="reserve"><span class="module-number">04</span><img src="./assets/neocity/06-mining-core-panel.svg" alt=""><div><b>RESERVE SETTLEMENT</b><small>Reserve and settlement state.</small><em>OPEN</em></div></button>
+          <button class="module-card glass" data-view="network"><span class="module-number">05</span><img src="./assets/neocity/08-city-ambience.svg" alt=""><div><b>CITY AMBIENCE</b><small>Rain, haze, traffic and phases.</small><em>OPEN</em></div></button>
+          <button class="module-card glass" data-view="power"><span class="module-number">06</span><img src="./assets/neocity/05-energy-grid.svg" alt=""><div><b>POWER GRID</b><small>Core power, grid health and stability.</small><em>OPEN</em></div></button>
+          <button class="module-card glass" data-view="spin"><span class="module-number">07</span><img src="./assets/neocity/07-yield-visualization.svg" alt=""><div><b>FREE HASHRATE SPIN</b><small>3-hour cooldown, capped 1–20 H/s range.</small><em>OPEN</em></div></button>
+          <button class="module-card glass" data-view="wallet"><span class="module-number">08</span><img src="./assets/neocity/06-mining-core-panel.svg" alt=""><div><b>WALLET</b><small>Crypto-only deposits and withdrawals.</small><em>OPEN</em></div></button>
+        </div>
+
+        <div class="bottom-panels">
+          <article class="wide-panel glass daily-panel">
+            <div>
+              <div><small class="eyebrow">DAILY BONUS</small><h3>Keep the city moving</h3><p>Eligibility and reward are validated by the server.</p></div>
+              <button class="primary-btn" data-action="daily">CLAIM BONUS</button>
+            </div>
+            <div class="countdown">RESETS IN <b id="resetTimer">-- : -- : --</b></div>
+          </article>
+
+          <article class="wide-panel glass mission-panel">
+            <div><small class="eyebrow">MISSIONS</small><h3>Complete missions</h3><p>Quest progress is persisted server-side.</p></div>
+            <div class="mission-meter"><b id="missionProgress">0/0</b><span>PROGRESS</span></div>
+            <button class="secondary-btn" data-view="missions">VIEW MISSIONS</button>
+          </article>
+
+          <article class="wide-panel glass quick-panel">
+            <small class="eyebrow">QUICK ACTIONS</small>
+            <div class="quick-grid">
+              <button data-view="spin">✦<span>Spin</span></button>
+              <button data-action="daily">🎁<span>Daily</span></button>
+              <button data-view="shop">▣<span>Shop</span></button>
+              <button data-view="wallet">▤<span>Wallet</span></button>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- CORE -->
+      <section class="view" id="view-core">
+        <div class="view-title"><small class="eyebrow">CITY MINING CORE</small><h2>Core Control</h2><p>Compute telemetry and mining state.</p></div>
+        <div class="core-hero glass">
+          <div class="core-art"><img src="./assets/neocity/03-holographic-core.svg" alt=""><div class="core-rings"></div><span class="core-live"><i></i>CORE ONLINE</span></div>
+          <div class="core-brief">
+            <small class="eyebrow">NETWORK CONFIGURATION</small>
+            <h3>Core settings</h3>
+            <div class="select-mock">Sector 07 <span>⌄</span></div>
+            <div class="telemetry-grid">
+              <article><small>CORE POWER</small><b id="corePowerValue">--</b><span>Server state</span><div class="meter"><i id="corePowerMeter" style="width:0%"></i></div></article>
+              <article><small>CORE TEMP</small><b>—</b><span>Telemetry source pending</span><div class="mini-graph"></div></article>
+              <article><small>CORE STABILITY</small><b>—</b><span>Backend source pending</span><div class="meter green"><i style="width:0%"></i></div></article>
+              <article><small>CORE EFFICIENCY</small><b>—</b><span>Backend source pending</span><div class="meter purple"><i style="width:0%"></i></div></article>
+            </div>
+          </div>
+        </div>
+        <div class="wide-stat glass"><div><small>ACTIVE HASHRATE</small><b id="coreHashrate">-- <i>H/s</i></b><span>Effective compute power</span></div><div class="line-graph purple"></div></div>
+      </section>
+
+      <!-- YIELD -->
+      <section class="view" id="view-yield">
+        <div class="view-title"><small class="eyebrow">REWARD ENGINE</small><h2>Yield Estimator</h2><p>Projection UI. No client-side reward crediting.</p></div>
+        <article class="yield-hero glass">
+          <div class="yield-title">ESTIMATED REWARDS</div>
+          <div class="yield-numbers"><div><b id="yieldHourly">--<small> N COIN</small></b><span>Per Hour</span></div><div><b id="yieldDaily">--<small> N COIN</small></b><span>Per Day</span></div></div>
+          <div class="large-yield-chart"><div class="chart-fill"></div><div class="chart-stroke"></div></div>
+          <div class="safe-note">Final reward calculation comes from the server-side reward engine.</div>
+        </article>
+        <div class="yield-list">
+          <div><span>MONTHLY ESTIMATE</span><b id="yieldMonthly">--</b></div>
+          <div><span>YEARLY ESTIMATE</span><b id="yieldYearly">--</b></div>
+          <div><span>NETWORK DIFFICULTY</span><b>Server</b></div>
+          <div><span>LUCK MULTIPLIER</span><b id="yieldLuck">Server</b></div>
+          <div><span>EFFICIENCY BONUS</span><b id="yieldEfficiency">Server</b></div>
+        </div>
+      </section>
+
+      <!-- RESERVE -->
+      <section class="view" id="view-reserve">
+        <div class="view-title"><small class="eyebrow">RESERVE</small><h2>Reserve Settlement</h2><p>Settlement is backend-controlled.</p></div>
+        <div class="reserve-hero glass"><img src="./assets/neocity/06-mining-core-panel.svg" alt=""><div class="reserve-copy"><small>RESERVE STATUS</small><b id="reserveStatus">—</b><span id="reserveBalance">Server data pending</span></div><div class="reserve-ring"></div></div>
+        <div class="reserve-grid">
+          <article class="glass stat-block"><small>AVAILABLE</small><b id="reserveAvailable">—</b><span>Current reserve</span></article>
+          <article class="glass stat-block"><small>REQUIRED</small><b>$1+ qualifying top-up</b><span>Withdrawal eligibility rule</span></article>
+          <article class="glass stat-block"><small>STATUS</small><b class="green-text">ADMIN APPROVAL</b><span>Required for withdrawal</span></article>
+        </div>
+      </section>
+
+      <!-- NETWORK -->
+      <section class="view" id="view-network">
+        <div class="view-title"><small class="eyebrow">LIVING CITY</small><h2>Network</h2><p>Atmosphere, traffic, energy grid and city phases.</p></div>
+        <article class="network-hero glass"><img src="./assets/neocity/04-neon-skyline.svg" alt=""><div class="network-glow"></div><div class="traffic"><img src="./assets/neocity/02-flying-vehicle.svg" alt=""></div><div class="rain-layer"></div><div class="network-badge"><span class="status-light"></span><b>LIVE CITY NETWORK</b><small>SECTOR 07 / N COIN</small></div></article>
+        <div class="network-cards">
+          <article class="glass network-card"><img src="./assets/neocity/05-energy-grid.svg" alt=""><b>Energy Grid</b><small>Live energy route visualization</small></article>
+          <article class="glass network-card"><img src="./assets/neocity/08-city-ambience.svg" alt=""><b>City Ambience</b><small>Rain, haze, particles, reflection</small></article>
+          <article class="glass network-card"><img src="./assets/neocity/02-flying-vehicle.svg" alt=""><b>Flying Vehicle</b><small>Traffic across active city lanes</small></article>
+          <article class="glass network-card"><img src="./assets/neocity/07-yield-visualization.svg" alt=""><b>Yield Visualization</b><small>Animated N Coin flow</small></article>
+        </div>
+        <div class="phase-board glass"><div><small class="eyebrow">CITY PHASES</small><h3 id="networkPhase">--</h3><p id="networkPhaseRange">--</p></div><div class="phase-dots"><span></span><span></span><span class="active"></span><span></span><span></span></div></div>
+      </section>
+
+      <!-- POWER -->
+      <section class="view" id="view-power">
+        <div class="view-title"><small class="eyebrow">ENERGY NETWORK</small><h2>Power</h2><p>Compute performance, grid health and power distribution.</p></div>
+        <div class="power-grid">
+          <article class="power-ring-card glass"><div class="power-ring"><b id="powerCore">--<small>%</small></b></div><strong>Core Power</strong><span>Mining Core Output</span></article>
+          <article class="power-ring-card glass"><div class="power-ring purple"><b>—<small>%</small></b></div><strong>Grid Energy</strong><span>Server telemetry pending</span></article>
+          <article class="power-ring-card glass"><div class="power-ring green"><b>—<small>%</small></b></div><strong>Stability</strong><span>Server telemetry pending</span></article>
+        </div>
+        <article class="wide-stat glass"><div><small>ACTIVE HASHRATE</small><b id="powerHashrate">-- <i>H/s</i></b><span>Compute Power</span></div><div class="line-graph cyan"></div></article>
+        <div class="grid-flow glass"><img src="./assets/neocity/05-energy-grid.svg" alt=""></div>
+      </section>
+
+      <!-- ECONOMY -->
+      <section class="view" id="view-economy">
+        <div class="view-title"><small class="eyebrow">NEOCITY ECONOMY</small><h2>Economy Control</h2><p>All production-changing actions must be server-authorized.</p></div>
+        <div class="economy-grid">
+          <article class="economy-card glass"><span class="economy-kicker">N COIN BALANCE</span><b id="economyNcoin">--</b><small>Server wallet</small></article>
+          <article class="economy-card glass"><span class="economy-kicker">HASHRATE</span><b id="economyHashrate">-- H/s</b><small>Effective hashrate</small></article>
+          <article class="economy-card glass"><span class="economy-kicker">LEVEL</span><b id="economyLevel">0</b><small>Allowed range 0–70</small></article>
+          <article class="economy-card glass"><span class="economy-kicker">TRANSACTION FEE</span><b>0.1</b><small>Applied server-side</small></article>
+        </div>
+        <div class="economy-actions">
+          <button class="economy-action glass" data-view="spin"><strong>✦ Free Hashrate Spin</strong><span>3-hour cooldown · 1–20 H/s normal range</span></button>
+          <button class="economy-action glass" data-view="levels"><strong>⌬ Levels 0–70</strong><span>Base H/s + level bonus + luck</span></button>
+          <button class="economy-action glass" data-action="exchange"><strong>ϟ N Coin → H/s</strong><span>Successful exchange resets level to 0</span></button>
+          <button class="economy-action glass" data-view="wallet"><strong>▤ Wallet</strong><span>Crypto-only payout · admin-approved withdrawal</span></button>
+        </div>
+        <div class="rule-grid">
+          <div><b>Deposit minimum</b><span>$0.01</span></div>
+          <div><b>Withdrawal minimum</b><span>$1.00</span></div>
+          <div><b>Qualifying top-up</b><span>$1.00 cumulative</span></div>
+          <div><b>Spin cooldown</b><span>3 hours</span></div>
+          <div><b>Normal spin</b><span>1–20 H/s</span></div>
+          <div><b>Welcome bonus</b><span>80 H/s once</span></div>
+        </div>
+      </section>
+
+      <!-- SPIN -->
+      <section class="view" id="view-spin">
+        <div class="view-title"><small class="eyebrow">REWARD MECHANIC</small><h2>Free Hashrate Spin</h2><p>Client shows state only; final reward is server-validated.</p></div>
+        <div class="spin-panel glass">
+          <div class="spin-orb"><div class="spin-core">✦</div></div>
+          <div class="spin-copy">
+            <small class="eyebrow">NORMAL REWARD RANGE</small>
+            <h3>1–20 H/s</h3>
+            <p>Cooldown: <b>3 hours</b>. Presentation-only jackpot visuals never create a large production credit.</p>
+            <button class="primary-btn" id="spinButton" data-action="spin">SPIN NOW</button>
+            <div class="cooldown-line"><span>Cooldown</span><b id="spinCooldown">Ready state controlled by server</b></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- LEVELS -->
+      <section class="view" id="view-levels">
+        <div class="view-title"><small class="eyebrow">PROGRESSION</small><h2>Levels 0–70</h2><p>No Level 71–80. Exchange to H/s resets progression level to 0.</p></div>
+        <div class="level-summary glass">
+          <div><span>Current level</span><b id="levelCurrent">0</b></div>
+          <div><span>Base H/s</span><b id="levelBaseHs">Server</b></div>
+          <div><span>Bonus H/s</span><b id="levelBonusHs">Server</b></div>
+          <div><span>Luck</span><b id="levelLuck">Server</b></div>
+        </div>
+        <div class="level-table-wrap glass">
+          <table class="level-table">
+            <thead><tr><th>LVL</th><th>BASE H/s</th><th>BONUS H/s</th><th>LUCK</th></tr></thead>
+            <tbody id="levelRows"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- SHOP -->
+      <section class="view" id="view-shop">
+        <div class="view-title"><small class="eyebrow">NEOCITY MARKET</small><h2>Miners & Shop</h2><p>Miner catalog, permanent H/s and membership listings are loaded from the authoritative data layer.</p></div>
+        <div class="catalog-tabs">
+          <button class="catalog-tab active" data-catalog="miners">MINERS</button>
+          <button class="catalog-tab" data-catalog="memberships">MEMBERSHIP</button>
+          <button class="catalog-tab" data-catalog="items">ITEMS</button>
+        </div>
+        <div class="catalog-grid" id="shopCatalog">
+          <article class="glass empty-state" aria-busy="true"><b>Loading catalog…</b><span>Reading the NeoCity market.</span></article>
+        </div>
+      </section>
+
+      <!-- MISSIONS -->
+      <section class="view" id="view-missions">
+        <div class="view-title"><small class="eyebrow">PROGRESSION</small><h2>Missions</h2><p>Offers/quests only credit after verified server callbacks.</p></div>
+        <div class="mission-tabs"><button class="active" type="button">All</button><button type="button">Daily</button><button type="button">Weekly</button><button type="button">Special</button></div>
+        <div class="mission-list">
+          <article class="glass completed"><span class="mission-icon">✓</span><div><b>Daily Login</b><small>Login to the platform</small></div><strong>STATUS</strong></article>
+          <article class="glass"><span class="mission-icon">✦</span><div><b>Spin the Wheel</b><small>Use Free Hashrate Spin</small></div><button data-view="spin">OPEN</button></article>
+          <article class="glass"><span class="mission-icon">◎</span><div><b>Complete 5 Offers</b><small>Verified provider callbacks only</small></div><button data-action="offers">OPEN</button></article>
+          <article class="glass"><span class="mission-icon">◌</span><div><b>Visit 10 Pages</b><small>Activity quest; no direct cash creation</small></div><button data-action="pages">OPEN</button></article>
+          <article class="glass"><span class="mission-icon">▣</span><div><b>Top Up $1 or More</b><small>Qualifying top-up for withdrawal eligibility</small></div><button data-view="wallet">OPEN</button></article>
+        </div>
+      </section>
+
+      <!-- REFERRALS -->
+      <section class="view" id="view-referrals">
+        <div class="view-title"><small class="eyebrow">NETWORK GROWTH</small><h2>Referrals</h2><p>Invite miners. Qualification and reward settlement remain server-side.</p></div>
+        <article class="referral-hero glass">
+          <img src="./assets/neocity/02-flying-vehicle.svg" alt="">
+          <div><small>YOUR REFERRAL CODE</small><b id="referralCode">—</b><button id="copyReferral" type="button">COPY CODE</button></div>
+        </article>
+        <div class="referral-stats">
+          <div class="glass"><small>INVITED</small><b id="refInvited">—</b><span>Users</span></div>
+          <div class="glass"><small>ACTIVE</small><b id="refActive">—</b><span>Miners</span></div>
+          <div class="glass"><small>EARNED</small><b id="refEarned">—</b><span>N Coin</span></div>
+        </div>
+        <article class="growth-panel glass">
+          <div><small class="eyebrow">REFERRAL RULE</small><h3>Verified growth only</h3><p>Self-referrals, duplicate abuse and unqualified activity are rejected by the server.</p></div>
+          <button class="secondary-btn" data-action="referral-history">VIEW HISTORY</button>
+        </article>
+      </section>
+
+      <!-- WALLET -->
+      <section class="view" id="view-wallet">
+        <div class="view-title"><small class="eyebrow">SECURE ASSET LAYER</small><h2>Wallet</h2><p>Crypto-only deposits and withdrawals.</p></div>
+        <article class="wallet-hero glass"><div><small>TOTAL BALANCE</small><b id="walletNcoin">-- <i>N COIN</i></b><span id="walletUsd">Server value</span></div><img src="./assets/neocity/06-mining-core-panel.svg" alt=""></article>
+        <div class="wallet-actions"><button class="deposit" data-action="deposit">↧ DEPOSIT</button><button class="withdraw" data-action="withdraw">↥ WITHDRAW</button></div>
+        <div class="action-stack">
+          <button data-action="wallet-balance"><span>▤</span><div><b>My Wallet</b><small>View balance</small></div><i>›</i></button>
+          <button data-action="deposit-history"><span>◷</span><div><b>Deposit History</b><small>Server ledger</small></div><i>›</i></button>
+          <button data-action="withdraw-history"><span>↥</span><div><b>Withdrawal History</b><small>Admin-approved flow</small></div><i>›</i></button>
+          <button data-action="transactions"><span>≋</span><div><b>Transaction History</b><small>Wallet ledger</small></div><i>›</i></button>
+          <button data-action="exchange"><span>ϟ</span><div><b>Convert N Coin → H/s</b><small>Successful exchange resets level to 0</small></div><i>›</i></button>
+        </div>
+        <div class="notice">
+          Minimum deposit/top-up <b>$0.01</b>. Withdrawal requires cumulative qualifying top-up <b>$1.00</b>.
+          Minimum withdrawal <b>$1.00</b>. Payout methods are <b>crypto-only</b> and withdrawal remains subject to admin approval.
+        </div>
+      </section>
+
+      <!-- LEADERBOARD -->
+      <section class="view" id="view-leaderboard">
+        <div class="view-title"><small class="eyebrow">CITY RANKING</small><h2>Leaderboard</h2><p>Ranking data should come from verified server activity.</p></div>
+        <div class="leaderboard glass">
+          <div class="rank-row head"><span>RANK</span><span>MINER</span><span>VOLUME</span></div>
+          <div class="rank-row"><b>—</b><strong>Leaderboard not connected</strong><span>Server</span></div>
+        </div>
+      </section>
+
+      
+      <!-- MINERS -->
+      <section class="view" id="view-miners">
+        <div class="view-title">
+          <small class="eyebrow">MINING MARKET</small>
+          <h2>Miners & H/s</h2>
+          <p>Catalog and active hashrate are read from the NeoCity mining data layer.</p>
+        </div>
+
+        <div class="miner-status glass">
+          <div><span>NETWORK</span><b id="minerNetworkStatus">CHECKING</b></div>
+          <div><span>YOUR EFFECTIVE H/s</span><b id="minerEffectiveHs">--</b></div>
+          <div><span>ACTIVE POOLS</span><b id="minerActivePools">--</b></div>
+        </div>
+
+        <div class="miner-grid" id="minerGrid">
+          <article class="glass empty-state">
+            <b>Loading miner catalog…</b>
+            <span>The catalog will use `mining_products` when populated.</span>
+          </article>
+        </div>
+
+        <div class="pool-grid" id="poolGrid">
+          <article class="glass empty-state">
+            <b>Loading pool state…</b>
+            <span>Pool totals are read from `mining_pool`.</span>
+          </article>
+        </div>
+      </section>
+
+      <!-- AI SUPPORT -->
+      <section class="view" id="view-support">
+        <div class="view-title">
+          <small class="eyebrow">NEOCITY AI SUPPORT</small>
+          <h2>AI Support</h2>
+          <p>Answers about account, mining, H/s, N Coin, wallet and rules. Production AI requires a server-side AI key.</p>
+        </div>
+        <article class="ai-panel glass">
+          <div class="ai-log" id="aiLog" aria-live="polite">
+            <div class="ai-message assistant">Hello, NeoMiner. Ask about H/s, N Coin, Free Hashrate Spin, deposits, withdrawals, levels, miners, pools, or account security.</div>
+          </div>
+          <form class="ai-form" id="aiForm">
+            <input id="aiInput" name="message" autocomplete="off" maxlength="1000" placeholder="Ask NeoCity AI…" required>
+            <button class="primary-btn" type="submit">SEND</button>
+          </form>
+          <small class="ai-disclaimer">AI support never approves withdrawals, changes balances, or overrides server rules.</small>
+        </article>
+      </section>
+
+      <!-- LEGAL -->
+      <section class="view" id="view-legal">
+        <div class="view-title">
+          <small class="eyebrow">LEGAL & COMPLIANCE</small>
+          <h2>Terms & Conditions</h2>
+          <p>Core operating rules for NeoCity Miner.</p>
+        </div>
+        <article class="legal-panel glass">
+          <h3>1. Account</h3>
+          <p>Each person is responsible for account security and truthful registration information. Abuse, automation, multi-accounting beyond the permitted limit, manipulation, or fraudulent activity may lead to suspension or blocking.</p>
+          <h3>2. N Coin & H/s</h3>
+          <p>N Coin is the internal reward currency. H/s is mining power. Production rewards, level changes, exchange results and wallet changes must be validated server-side.</p>
+          <h3>3. Free Hashrate Spin</h3>
+          <p>Cooldown is 3 hours. Normal reward range is 1–20 H/s. The 80 H/s welcome bonus is one-time only. Promotional jackpot visuals do not represent guaranteed large payouts.</p>
+          <h3>4. Deposits & Withdrawals</h3>
+          <p>Minimum deposit/top-up is $0.01. Withdrawal minimum is $1.00. Withdrawal eligibility requires cumulative qualifying top-up of at least $1.00. Payout is crypto-only and withdrawal requests remain subject to approval and fraud/security checks.</p>
+          <h3>5. Offers, PTC & Referrals</h3>
+          <p>Provider rewards are credited only after verified callbacks/events. Rewards should remain inside the configured economy budget and realized revenue limits.</p>
+          <h3>6. Mining & Pools</h3>
+          <p>Mining data may change with pool state, emission controls, account entitlements, energy rules and active economy parameters. Displayed estimates are not guaranteed payout promises.</p>
+          <h3>7. Support</h3>
+          <p>AI support provides informational assistance. It cannot approve financial transactions or override account/security controls.</p>
+        </article>
+      </section>
+
+
+      <section class="view" id="view-privacy">
+        <div class="view-title">
+          <small class="eyebrow">PRIVACY & SECURITY</small>
+          <h2>Privacy Center</h2>
+          <p>How NeoCity handles account, support and financial security boundaries.</p>
+        </div>
+        <article class="legal-panel glass">
+          <h3>Data minimization</h3>
+          <p>NeoCity should retain only data required for account, security, support and transaction operations.</p>
+          <h3>Credentials & secrets</h3>
+          <p>Service-role credentials, AI provider keys, payment-provider secrets and Turnstile secret keys are server-side only and must never appear in public frontend files.</p>
+          <h3>Financial safety</h3>
+          <p>Balances, rewards, withdrawals, deposits, exchanges and reward eligibility are authoritative only when accepted by the backend/database.</p>
+          <h3>AI Support</h3>
+          <p>AI Support is informational. It cannot approve withdrawals, edit balances, bypass security controls or override the account state stored by NeoCity.</p>
+        </article>
+      </section>
+
+      
+      <section class="view" id="view-bounty">
+        <div class="view-title"><small class="eyebrow">CREATOR NETWORK</small><h2>Bounty</h2><p>Community growth tasks with proof and server review.</p></div>
+        <div class="bounty-grid" id="bountyGrid">
+          <article class="glass empty-state" aria-busy="true"><b>Loading bounties…</b><span>Reading active bounty definitions.</span></article>
+        </div>
+      </section>
+
+      <!-- SETTINGS / HELP -->
+      <section class="view" id="view-settings">
+        <div class="view-title"><small class="eyebrow">PREFERENCES</small><h2>Settings</h2><p>Customize the NeoCity experience.</p></div>
+        <div class="settings-list">
+          <button type="button" data-action="toggle-audio"><span>◉</span><div><b>City Ambience</b><small>Audio and atmospheric effects</small></div><i class="toggle mini on"></i></button>
+          <button type="button" data-action="toggle-motion"><span>✦</span><div><b>Animation</b><small>Dynamic visual motion</small></div><i class="toggle mini on"></i></button>
+          <button type="button"><span>☾</span><div><b>Theme</b><small>Neo Dark</small></div><i>›</i></button>
+          <button type="button" data-action="security"><span>♢</span><div><b>Security</b><small>Turnstile + server-side anti-abuse</small></div><i>›</i></button>
+        </div>
+      </section>
+
+      <section class="view" id="view-help">
+        <div class="view-title"><small class="eyebrow">SUPPORT</small><h2>Help Center</h2><p>Rules and account protection.</p></div>
+        <div class="faq-list">
+          <button type="button"><b>What is N Coin?</b><span>+</span></button>
+          <button type="button"><b>How does Free Hashrate Spin work?</b><span>+</span></button>
+          <button type="button"><b>How is N Coin exchanged to H/s?</b><span>+</span></button>
+          <button type="button"><b>Why does my level reset after exchange?</b><span>+</span></button>
+          <button type="button"><b>How do I withdraw?</b><span>+</span></button>
+          <button type="button"><b>How are offers/PTC rewards funded?</b><span>+</span></button>
+        </div>
+      </section>
+    </main>
+
+    <nav class="mobile-tabs" aria-label="Mobile navigation">
+      <button class="active" data-view="home"><span>⌂</span><b>Home</b></button>
+      <button data-view="economy"><span>◫</span><b>Economy</b></button>
+      <button data-view="spin"><span>✦</span><b>Spin</b></button>
+      <button data-view="wallet"><span>▤</span><b>Vault</b></button>
+      <button data-view="support"><span>AI</span><b>Support</b></button>
+    </nav>
+  </div>
+
+  
+  <dialog class="neo-modal" id="walletModal">
+    <div class="modal-card glass">
+      <button class="modal-close" data-close-modal aria-label="Close">×</button>
+      <small class="eyebrow" id="modalEyebrow">WALLET</small>
+      <h3 id="modalTitle">Wallet action</h3>
+
+      <form id="depositForm" class="modal-form" hidden>
+        <label>Amount (USD)
+          <input name="amount" type="number" min="0.01" step="0.01" placeholder="1.00" required>
+        </label>
+        <label>Crypto
+          <select name="currency" required>
+            <option value="USDT">USDT</option><option value="USDC">USDC</option>
+            <option value="BTC">BTC</option><option value="ETH">ETH</option>
+            <option value="BNB">BNB</option><option value="SOL">SOL</option>
+          </select>
+        </label>
+        <label>Network
+          <input name="network" placeholder="e.g. TRC20 / ERC20" maxlength="32">
+        </label>
+        <label>Transaction hash (optional until payment is sent)
+          <input name="transaction_hash" maxlength="180" placeholder="Paste tx hash after sending">
+        </label>
+        <div id="depositTurnstile" class="turnstile-container"></div><input type="hidden" name="turnstile_token" value="">
+        <button class="primary-btn" type="submit">CREATE DEPOSIT REQUEST</button>
+        <small class="form-note">Deposit minimum: $0.01. Balance is not credited until verification.</small>
+      </form>
+
+      <form id="withdrawForm" class="modal-form" hidden>
+        <label>Amount (USD value)
+          <input name="amount_usd" type="number" min="1" step="0.01" placeholder="1.00" required>
+        </label>
+        <label>Payout crypto
+          <select name="currency" required></select>
+        </label>
+        <label>Network
+          <input name="network" placeholder="Network" maxlength="32" required>
+        </label>
+        <label>Destination address
+          <input name="destination_address" maxlength="180" placeholder="Your wallet address" required>
+        </label>
+        <div id="withdrawTurnstile" class="turnstile-container"></div><input type="hidden" name="turnstile_token" value="">
+        <button class="primary-btn" type="submit">REQUEST WITHDRAWAL</button>
+        <small class="form-note">Withdrawal minimum: $1.00. Cumulative qualifying top-up of $1.00 is required. Crypto-only. Admin approval applies.</small>
+      </form>
+
+      <div id="modalMessage" class="modal-message"></div>
+    </div>
+  </dialog>
+
+  
+  <dialog class="neo-modal" id="bountyModal">
+    <div class="modal-card glass">
+      <button class="modal-close" data-bounty-close aria-label="Close">×</button>
+      <small class="eyebrow">BOUNTY SUBMISSION</small>
+      <h3>Submit proof</h3>
+      <form id="bountyForm" class="modal-form">
+        <input type="hidden" name="bounty_id">
+        <label>Proof URL<input name="proof_url" type="url" placeholder="https://…" required></label>
+        <button class="primary-btn" type="submit">SUBMIT FOR REVIEW</button>
+      </form>
+      <div class="modal-message" id="bountyMessage"></div>
+    </div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <!-- No service keys belong in these files. -->
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="./config.js"></script>
+  <script src="./supabase.js"></script>
+  <script src="./app.js"></script>
+  <script src="./js/neocity/economy-ui.js"></script>
+  <script src="./js/neocity/modules.js"></script>
+  <script src="./js/neocity/wallet-ui.js"></script>
+  <script src="./js/neocity/auth-ui.js"></script>
+  <script src="./js/neocity/hero-animation.js" defer></script>
+</body>
+</html>
