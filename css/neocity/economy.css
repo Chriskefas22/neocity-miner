@@ -1,0 +1,38 @@
+/* NeoCity V4.3 — economy UI layer */
+.economy-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.economy-card{padding:16px;min-height:120px;display:flex;flex-direction:column;justify-content:space-between}
+.economy-kicker{font-size:8px;letter-spacing:.15em;color:#7890a5}
+.economy-card b{font-size:24px;color:var(--text);margin-top:8px}
+.economy-card small{font-size:8px;color:var(--muted)}
+.economy-actions{display:grid;gap:9px;margin-top:12px}
+.economy-action{padding:15px;text-align:left;border:1px solid var(--line);border-radius:15px}
+.economy-action strong{display:block;font-size:12px}
+.economy-action span{display:block;font-size:8px;color:var(--muted);margin-top:4px}
+.rule-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:12px}
+.rule-grid>div{padding:12px;border:1px solid var(--line);border-radius:13px;background:rgba(7,17,29,.55)}
+.rule-grid b{display:block;font-size:8px}
+.rule-grid span{display:block;margin-top:4px;color:var(--cyan);font-size:11px}
+.spin-panel{display:grid;gap:16px;padding:18px;align-items:center}
+.spin-orb{display:grid;place-items:center;min-height:260px;border-radius:22px;background:radial-gradient(circle at center,rgba(73,234,255,.15),rgba(5,12,22,.1) 48%,transparent 70%)}
+.spin-core{width:126px;height:126px;border-radius:50%;display:grid;place-items:center;border:1px solid rgba(73,234,255,.35);box-shadow:0 0 70px rgba(73,234,255,.18),inset 0 0 36px rgba(173,99,255,.12);font-size:42px;color:var(--cyan);animation:spinPulse 2.5s ease-in-out infinite}
+@keyframes spinPulse{50%{transform:scale(1.04);box-shadow:0 0 90px rgba(73,234,255,.25),inset 0 0 42px rgba(173,99,255,.16)}}
+.spin-copy h3{font-size:32px;margin:8px 0}
+.spin-copy p{font-size:10px;color:var(--muted);line-height:1.6}
+.cooldown-line{display:flex;justify-content:space-between;gap:12px;padding-top:12px;margin-top:12px;border-top:1px solid var(--line);font-size:8px;color:var(--muted)}
+.cooldown-line b{color:var(--cyan)}
+.level-summary{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;padding:14px}
+.level-summary div{padding:10px;border-radius:12px;background:rgba(4,10,18,.45)}
+.level-summary span{display:block;font-size:7px;color:var(--muted)}
+.level-summary b{display:block;font-size:16px;margin-top:4px}
+.level-table-wrap{overflow:auto;margin-top:10px}
+.level-table{width:100%;border-collapse:collapse;min-width:420px}
+.level-table th,.level-table td{text-align:left;padding:10px;border-bottom:1px solid var(--line);font-size:8px}
+.level-table th{color:#7890a5;letter-spacing:.08em}
+.level-table td:nth-child(1){color:var(--cyan);font-weight:800}
+.safe-note{margin-top:12px;padding:10px;border:1px solid rgba(245,202,100,.18);border-radius:10px;color:#d8c78d;font-size:8px}
+@media (min-width:768px){
+  .economy-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .spin-panel{grid-template-columns:1fr 1fr}
+  .level-summary{grid-template-columns:repeat(4,1fr)}
+  .rule-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
