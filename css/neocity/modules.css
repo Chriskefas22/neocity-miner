@@ -1,0 +1,15 @@
+/* NeoCity V4.4 Final — miner/support/legal modules */
+.miner-status{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:12px;margin-bottom:10px}
+.miner-status div{padding:10px;border-radius:12px;background:rgba(5,12,22,.55);border:1px solid var(--line)}
+.miner-status span{display:block;color:var(--muted);font-size:7px}.miner-status b{display:block;margin-top:4px;font-size:14px}
+.miner-grid,.pool-grid{display:grid;grid-template-columns:1fr;gap:9px}
+.miner-card{overflow:hidden}.miner-image{height:180px;position:relative;background:#030a12}.miner-image img{width:100%;height:100%;object-fit:cover}.miner-image span{position:absolute;left:10px;top:10px;border:1px solid var(--line);background:rgba(2,9,17,.7);padding:5px 7px;border-radius:8px;font-size:6px;color:var(--cyan)}
+.miner-body{padding:13px}.miner-body small{color:var(--muted);font-size:7px}.miner-body h3{font-size:15px;margin:6px 0}.miner-stat{display:flex;justify-content:space-between;gap:10px;align-items:center}.miner-stat b{font-size:16px;color:var(--cyan)}.miner-stat span{font-size:8px;color:var(--gold)}.miner-body p{font-size:8px;color:var(--muted);line-height:1.5}
+.pool-card{padding:12px}.pool-card>div{display:flex;flex-direction:column;gap:3px}.pool-card small{font-size:7px;color:var(--muted)}.pool-card b{font-size:10px}.pool-card>span{display:block;margin:8px 0;color:var(--cyan);font-weight:800}
+.empty-state{padding:16px;text-align:center}.empty-state b{display:block;font-size:10px}.empty-state span{display:block;font-size:8px;color:var(--muted);margin-top:5px;line-height:1.5}
+.ai-panel{padding:14px}.ai-log{height:360px;overflow:auto;padding:5px}.ai-message{max-width:88%;padding:9px 11px;border:1px solid var(--line);border-radius:12px;margin:7px 0;font-size:9px;line-height:1.5}.ai-message.assistant{background:rgba(73,234,255,.05)}.ai-message.user{margin-left:auto;background:rgba(173,99,255,.07);border-color:rgba(173,99,255,.18)}
+.ai-form{display:flex;gap:8px;margin-top:10px}.ai-form input{flex:1;min-width:0;border:1px solid var(--line);border-radius:11px;background:#05101b;color:var(--text);padding:11px;font-size:9px;outline:0}.ai-form input:focus{border-color:rgba(73,234,255,.45)}.ai-disclaimer{display:block;color:var(--muted);font-size:7px;margin-top:7px;line-height:1.5}
+.legal-panel{padding:16px}.legal-panel h3{font-size:11px;margin:15px 0 5px;color:var(--cyan)}.legal-panel h3:first-child{margin-top:0}.legal-panel p{font-size:9px;color:var(--muted);line-height:1.65;margin:0}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--cyan)}
+@media (min-width:768px){.miner-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.pool-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (min-width:1100px){.miner-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.pool-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
